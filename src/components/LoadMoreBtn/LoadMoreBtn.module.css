@@ -1,0 +1,14 @@
+.loadMore {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.loadMoreBtn {
+    padding: 10px 20px;
+    background-color: var(--load-more-btn-bg-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
