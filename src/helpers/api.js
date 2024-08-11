@@ -8,7 +8,7 @@ axios.defaults.headers.common[
   "Authorization"
 ] = `Client-ID ${VITE_UNSPLASH_API_KEY}`;
 
-export const fetchImages = async ({ query, page, per_page }) => {
+export const fetchImageRequest = async ({ query, page, per_page }) => {
   const response = await axios.get(
     `/search/photos?query=${query}&page=${page}&per_page=${per_page}&orientation=landscape`
   );
