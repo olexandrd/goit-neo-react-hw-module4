@@ -1,0 +1,15 @@
+.imageGallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px auto;
+    gap: var(--image-gallery-gap);
+
+}
+
+
+.imageGalleryItem {
+    width: calc(100% / var(--image-gallery-column-count) - (var(--image-gallery-gap) * (var(--image-gallery-column-count) - 1)));
+    overflow: hidden;
+
+}

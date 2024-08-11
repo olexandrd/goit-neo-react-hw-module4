@@ -1,3 +1,5 @@
 :root {
     --header-bg-color: #465df3;
+    --image-gallery-column-count: 4;
+    --image-gallery-gap: 15px;
 }
