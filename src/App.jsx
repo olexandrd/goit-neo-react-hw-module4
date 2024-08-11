@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import SearchBar from "./components/SearchBar/SearchBar";
 import { normalizeString } from "./helpers/string";
 
@@ -9,6 +10,7 @@ const App = () => {
 
   return (
     <>
+      <Toaster />
       <SearchBar searchHandler={searchHandler} />
     </>
   );
