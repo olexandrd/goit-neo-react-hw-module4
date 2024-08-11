@@ -1,3 +1,37 @@
 .header {
-    margin: 10px auto;
+    background-color: var(--header-bg-color);
+    padding: 30px 0;
+    box-shadow: var(--header-bg-color) 0px 0px 10px;
+}
+
+.searchForm {
+    display: flex;
+    margin: 0 auto;
+    position: relative;
+}
+
+.searchFormInput {
+    width: 50%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    padding-left: 40px;
+    position: absolute;
+    left: 25%;
+    top: -18px;
+}
+
+.searchFormBtn {
+    background-color: transparent;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    left: 25%;
+    top: -18px;
+}
+
+.searchFormBtn svg {
+    height: 20px;
+    width: 20px;
 }
