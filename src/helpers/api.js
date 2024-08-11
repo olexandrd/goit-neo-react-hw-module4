@@ -12,5 +12,6 @@ export const fetchImageRequest = async ({ query, page, per_page }) => {
   const response = await axios.get(
     `/search/photos?query=${query}&page=${page}&per_page=${per_page}&orientation=landscape`
   );
+  console.log(response.data);
   return response.data;
 };

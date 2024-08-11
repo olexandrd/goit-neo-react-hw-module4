@@ -8,23 +8,25 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import { normalizeString } from "./helpers/string";
 import { fetchImageRequest } from "./helpers/api";
 
+const paginationPerPage = 20;
+
 const App = () => {
-  const [page, setPage] = useState(1);
+  // const [paginationPage, setPage] = useState(1);
   const [imgArray, setImgArray] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const fetchImages = async ({ query: searchQuery, page: page }) => {
+  const fetchImages = async ({ query, page }) => {
     try {
       setError(false);
       setLoading(true);
       const data = await fetchImageRequest({
-        query: searchQuery,
+        query: query,
         page: page,
-        per_page: 20,
+        per_page: paginationPerPage,
       });
       setImgArray((prev) => [...prev, ...data.results]);
-      setPage(page + 1);
+      // setPage(page + 1);
     } catch (error) {
       setError(true);
     } finally {
@@ -36,15 +38,8 @@ const App = () => {
     e.preventDefault();
     const searchQuery = normalizeString(e.target.searchQuery.value);
 
-    fetchImages({ query: searchQuery, page: page });
-
-    // fetchImages({ query: searchQuery, page: page, per_page: 20 })
-    //   .then((data) => {
-    //     console.log(data);
-    //     setImgArray((prev) => [...prev, ...data.results]);
-    //     setPage(page + 1);
-    //   })
-    //   .catch((error) => console.error(error));
+    setImgArray([]);
+    fetchImages({ query: searchQuery, page: 1 });
   };
 
   return (
