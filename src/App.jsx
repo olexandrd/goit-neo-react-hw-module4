@@ -15,14 +15,24 @@ const App = () => {
   const [paginationPage, setPaginationPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [imgArray, setImgArray] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [loadMore, setLoadMore] = useState(false);
 
   useEffect(() => {
     if (searchQuery) {
       fetchImages({ query: searchQuery, page: 1 });
     }
   }, [searchQuery]);
+
+  useEffect(() => {
+    if (imgArray.length > 0 && paginationPage < totalPages) {
+      setLoadMore(true);
+    } else {
+      setLoadMore(false);
+    }
+  }, [paginationPage, totalPages, imgArray]);
 
   const fetchImages = async ({ query, page }) => {
     try {
@@ -34,6 +44,7 @@ const App = () => {
         per_page: paginationPerPage,
       });
       setImgArray((prev) => [...prev, ...data.results]);
+      setTotalPages(data.total_pages);
     } catch (error) {
       setError(true);
     } finally {
@@ -61,7 +72,7 @@ const App = () => {
       {error && <ErrorMessage />}
       <ImageGallery imgArray={imgArray} />
       {loading && <Loader />}
-      {imgArray.length > 0 && <LoadMoreBtn loadMoreHandler={loadMoreHandler} />}
+      {loadMore && <LoadMoreBtn loadMoreHandler={loadMoreHandler} />}
     </>
   );
 };
