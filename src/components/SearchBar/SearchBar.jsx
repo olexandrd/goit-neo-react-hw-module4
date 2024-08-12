@@ -10,17 +10,13 @@ const SearchBar = ({ searchHandler }) => {
     if (normalizeString(e.target.searchQuery.value) === "") {
       toast.error("Add search query!", { icon: "🔍" });
     } else {
-      searchHandler(e);
+      searchHandler(e.target.searchQuery.value);
     }
   };
   return (
     <>
       <header className={styles.header}>
-        <form
-          className={styles.searchForm}
-          //   onSubmit={searchHandler}
-          onSubmit={validateSearchQuery}
-        >
+        <form className={styles.searchForm} onSubmit={validateSearchQuery}>
           <input
             className={styles.searchFormInput}
             type="text"

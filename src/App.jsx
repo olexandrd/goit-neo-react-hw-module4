@@ -20,11 +20,35 @@ const App = () => {
   const [error, setError] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
 
+  const searchHandler = (submittedQuery) => {
+    const searchQuery = normalizeString(submittedQuery);
+    setSearchQuery(searchQuery);
+    setImgArray([]);
+    setPaginationPage(1);
+  };
+
   useEffect(() => {
-    if (searchQuery) {
-      fetchImages({ query: searchQuery, page: 1 });
-    }
-  }, [searchQuery]);
+    if (!searchQuery) return;
+
+    const fetchData = async () => {
+      try {
+        setError(false);
+        setLoading(true);
+        const data = await fetchImageRequest({
+          query: searchQuery,
+          page: paginationPage,
+          per_page: paginationPerPage,
+        });
+        setImgArray((prev) => [...prev, ...data.results]);
+        setTotalPages(data.total_pages);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [searchQuery, paginationPage]);
 
   useEffect(() => {
     if (imgArray.length > 0 && paginationPage < totalPages) {
@@ -34,35 +58,8 @@ const App = () => {
     }
   }, [paginationPage, totalPages, imgArray]);
 
-  const fetchImages = async ({ query, page }) => {
-    try {
-      setError(false);
-      setLoading(true);
-      const data = await fetchImageRequest({
-        query: query,
-        page: page,
-        per_page: paginationPerPage,
-      });
-      setImgArray((prev) => [...prev, ...data.results]);
-      setTotalPages(data.total_pages);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const searchHandler = async (e) => {
-    e.preventDefault();
-    // const searchQuery = normalizeString(e.target.searchQuery.value);
-    setSearchQuery(normalizeString(e.target.searchQuery.value));
-    setImgArray([]);
-    setPaginationPage(1);
-  };
-
   const loadMoreHandler = async () => {
     setPaginationPage((prev) => prev + 1);
-    await fetchImages({ query: searchQuery, page: paginationPage + 1 });
   };
 
   return (

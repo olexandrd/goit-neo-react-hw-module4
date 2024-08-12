@@ -9,8 +9,13 @@ axios.defaults.headers.common[
 ] = `Client-ID ${VITE_UNSPLASH_API_KEY}`;
 
 export const fetchImageRequest = async ({ query, page, per_page }) => {
-  const response = await axios.get(
-    `/search/photos?query=${query}&page=${page}&per_page=${per_page}&orientation=landscape`
-  );
+  const response = await axios.get("/search/photos", {
+    params: {
+      query,
+      page,
+      per_page,
+      orientation: "landscape",
+    },
+  });
   return response.data;
 };
