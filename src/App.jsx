@@ -6,8 +6,9 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import { normalizeString } from "./helpers/string";
-import { fetchImageRequest } from "./helpers/api";
+import { imageRequest } from "./helpers/api";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "./components/ImageModal/ImageModal";
 
 const paginationPerPage = 20;
 
@@ -19,6 +20,8 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedImg, setSelectedImg] = useState(null);
 
   const searchHandler = (submittedQuery) => {
     const searchQuery = normalizeString(submittedQuery);
@@ -34,7 +37,7 @@ const App = () => {
       try {
         setError(false);
         setLoading(true);
-        const data = await fetchImageRequest({
+        const data = await imageRequest({
           query: searchQuery,
           page: paginationPage,
           per_page: paginationPerPage,
@@ -62,12 +65,35 @@ const App = () => {
     setPaginationPage((prev) => prev + 1);
   };
 
+  function closeModal() {
+    setModalIsOpen(false);
+  }
+
+  function openModal(e) {
+    if (e.target.tagName !== "IMG") return;
+    setSelectedImg(imgArray.filter((img) => img.id === e.target.dataset.id)[0]);
+    setModalIsOpen(true);
+  }
+
+  // useEffect(() => {
+  //   if (selectedImg) {
+  //     setModalIsOpen(true);
+  //   }
+  // }, [selectedImg]);
+
   return (
     <>
       <Toaster />
+      {
+        <ImageModal
+          modalIsOpen={modalIsOpen}
+          onClose={closeModal}
+          image={selectedImg}
+        />
+      }
       <SearchBar searchHandler={searchHandler} />
       {error && <ErrorMessage />}
-      <ImageGallery imgArray={imgArray} />
+      <ImageGallery imgArray={imgArray} clickHandler={openModal} />
       {loading && <Loader />}
       {loadMore && <LoadMoreBtn loadMoreHandler={loadMoreHandler} />}
     </>

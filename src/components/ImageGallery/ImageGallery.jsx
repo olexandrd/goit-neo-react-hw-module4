@@ -1,12 +1,12 @@
 import ImageCard from "../ImageCard/ImageCard";
 import styles from "./ImageGallery.module.css";
 
-const ImageGallery = ({ imgArray }) => {
+const ImageGallery = ({ imgArray, clickHandler }) => {
   return (
-    <ul className={styles.imageGallery}>
+    <ul className={styles.imageGallery} onClick={clickHandler}>
       {imgArray.map(({ id, description, urls: { small: thumbURL } }) => (
         <li key={id} className={styles.imageGalleryItem}>
-          <ImageCard thumbURL={thumbURL} description={description} />
+          <ImageCard id={id} thumbURL={thumbURL} description={description} />
         </li>
       ))}
     </ul>

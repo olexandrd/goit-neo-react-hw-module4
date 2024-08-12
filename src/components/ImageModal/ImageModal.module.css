@@ -1,0 +1,40 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgb(0 0 0 / 75%);
+    z-index: 2;
+}
+
+.modal {
+    position: absolute;
+    border: 1px solid rgb(204 204 204);
+    background: rgb(255 255 255);
+    overflow: hidden;
+    border-radius: 4px;
+    outline: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    max-height: 90vh;
+    aspect-ratio: 4 / 3;
+}
+
+.modal img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.modal p {
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    border: 2px solid rgb(117, 71, 232);
+    box-shadow: 0 0 5px rgb(117, 71, 232);
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: 600;
+}
