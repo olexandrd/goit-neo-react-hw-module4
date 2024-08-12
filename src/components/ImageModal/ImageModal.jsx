@@ -14,8 +14,8 @@ function ImageModal({ image, onClose, modalIsOpen }) {
       overlayClassName={styles.overlay}
       className={styles.modal}
     >
-      <img src={image.urls.regular} alt={image.alt_description} />
-      <p>Likes: {image.likes} </p>
+      {image && <img src={image.urls.regular} alt={image.alt_description} />}
+      {image && <p>Likes ❤️ {image.likes} </p>}
     </Modal>
   );
 }
