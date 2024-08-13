@@ -3,10 +3,15 @@ import styles from "./ImageGallery.module.css";
 
 const ImageGallery = ({ imgArray, clickHandler }) => {
   return (
-    <ul className={styles.imageGallery} onClick={clickHandler}>
+    <ul className={styles.imageGallery}>
       {imgArray.map(({ id, description, urls: { small: thumbURL } }) => (
         <li key={id} className={styles.imageGalleryItem}>
-          <ImageCard id={id} thumbURL={thumbURL} description={description} />
+          <ImageCard
+            id={id}
+            thumbURL={thumbURL}
+            description={description}
+            clickHandler={clickHandler}
+          />
         </li>
       ))}
     </ul>

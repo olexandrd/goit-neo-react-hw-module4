@@ -1,6 +1,6 @@
 import styles from "./ImageCard.module.css";
 
-const ImageCard = ({ thumbURL, description, id }) => {
+const ImageCard = ({ thumbURL, description, id, clickHandler }) => {
   return (
     <div className={styles.imageCard}>
       <img
@@ -8,6 +8,7 @@ const ImageCard = ({ thumbURL, description, id }) => {
         alt={description}
         className={styles.imageCardImage}
         data-id={id}
+        onClick={clickHandler}
       />
     </div>
   );

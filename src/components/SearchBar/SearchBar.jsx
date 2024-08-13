@@ -7,10 +7,11 @@ import { normalizeString } from "../../helpers/string";
 const SearchBar = ({ searchHandler }) => {
   const validateSearchQuery = (e) => {
     e.preventDefault();
-    if (normalizeString(e.target.searchQuery.value) === "") {
+    const searchQuery = e.target.elements.searchQuery.value;
+    if (normalizeString(searchQuery) === "") {
       toast.error("Add search query!", { icon: "🔍" });
     } else {
-      searchHandler(e.target.searchQuery.value);
+      searchHandler(searchQuery);
     }
   };
   return (
