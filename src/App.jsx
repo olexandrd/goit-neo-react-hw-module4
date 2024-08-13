@@ -75,11 +75,9 @@ const App = () => {
     setModalIsOpen(true);
   }
 
-  // useEffect(() => {
-  //   if (selectedImg) {
-  //     setModalIsOpen(true);
-  //   }
-  // }, [selectedImg]);
+  useEffect(() => {
+    document.body.style.overflow = modalIsOpen ? "hidden" : "unset";
+  }, [modalIsOpen]);
 
   return (
     <>

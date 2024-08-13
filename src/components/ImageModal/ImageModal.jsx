@@ -15,7 +15,16 @@ function ImageModal({ image, onClose, modalIsOpen }) {
       className={styles.modal}
     >
       {image && <img src={image.urls.regular} alt={image.alt_description} />}
-      {image && <p>Likes ❤️ {image.likes} </p>}
+      {image && (
+        <div className={styles.stats}>
+          <p className={styles.statsItem}>
+            Likes ❤️ <span className={styles.statsValue}>{image.likes} </span>
+          </p>
+          <p className={styles.statsItem}>
+            Author: <span className={styles.statsValue}>{image.user.name}</span>{" "}
+          </p>
+        </div>
+      )}
     </Modal>
   );
 }
