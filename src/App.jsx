@@ -71,8 +71,12 @@ const App = () => {
   }
 
   function openModal(e) {
-    if (e.target.tagName !== "IMG") return;
-    setSelectedImg(imgArray.filter((img) => img.id === e.target.dataset.id)[0]);
+    setSelectedImg({
+      urls: { regular: e.target.dataset.regularUrl },
+      alt_description: e.target.alt,
+      likes: e.target.dataset.likes,
+      user: { name: e.target.dataset.username },
+    });
     setModalIsOpen(true);
   }
 
